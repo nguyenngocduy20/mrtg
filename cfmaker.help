@@ -1,0 +1,103 @@
+# /usr/local/src/mrtg-2.17.4/bin/cfgmaker --help
+Usage:
+    cfgmaker [options] [community@]router [[options] [community@]router ...]
+
+Options:
+     --ifref=nr    interface references by Interface Number (default)
+     --ifref=ip                     ... by Ip Address
+     --ifref=eth                        ... by Ethernet Number
+     --ifref=descr                      ... by Interface Description
+     --ifref=name                       ... by Interface Name
+     --ifref=type                       ... by Interface Type
+                    You may also use multiple options separated by commas,
+                   in which case the first available one is used:
+                   e.g.  --ifref=ip,name,nr
+
+     --ifdesc=nr       interface description uses Interface Number (default)
+     --ifdesc=ip                        ... uses Ip Address
+     --ifdesc=eth                       ... uses Ethernet Number
+     --ifdesc=descr                     ... uses Interface Description
+     --ifdesc=name                      ... uses Interface Name
+     --ifdesc=catname                   ... uses CatOS Interface Name
+     --ifdesc=ppname                    ... uses Passport Port Name
+     --ifdesc=alias                     ... uses Interface Alias
+     --ifdesc=type                      ... uses Interface Type
+                    You may also use multiple options separated by commas,
+                   in which case the first available one is used:
+                   e.g.  --ifdesc=catname,ppname,descr,alias,ip,name,nr
+
+     --if-filter=f     Test every interface against filter f to decide wether
+                       or not to include that interface into the collection.
+                       Currently f is being evaluated as a Perl expression
+                       and it's truth value is used to reject or accept the
+                       interface.
+                       (Experimental, under development, might change)
+
+     --if-template=templatefile
+                       Replace the normal target entries for the interfaces
+                       with an entry as specified by the contents in the file
+                       templatefile.  The file is supposed to contain Perl
+                       code to be executed to generate the lines for the
+                       target in the configuration file.
+                       (Experimental, under development, might change)
+
+     --host-template=templatefile
+                       In addition to creating targets for a host's interfaces
+                       do also create targets for the host itself as specified
+                       by the contents in the file templatefile.  The file is
+                       supposed to contain Perl code to be executed to generate
+                       the lines for the host related targets (such as CPU,
+                       ping response time measurements etc.) in the config-
+                       uration file.
+                       (Experimental, under development, might change)
+
+     --global "x: a"   add global config entries
+
+     --no-down         do not look at admin or opr status of interfaces
+
+     --show-op-down    show interfaces which are operatively down
+
+     --zero-speed=spd  use this speed in bits-per-second as the interface
+                       speed for all interfaces that return a speed of 0
+                       via ifSpeed/ifHighSpeed.  100Mbps = 100000000
+
+     --subdirs=format  give each router its own subdirectory, naming each per
+                       "format", in which HOSTNAME and SNMPNAME will be
+                       replaced by the values of those items -- for instance,
+                       --subdirs=HOSTNAME or --subdirs="HOSTNAME (SNMPNAME)"
+
+     --noreversedns    do not reverse lookup ip numbers
+
+     --community=cmty  Set the default community string to "cmty" instead of
+                       "public".
+
+     --enable-ipv6     Enable IPv6 support, if the required libraries are
+                       present. Numeric IPv6 addresses must be enclosed
+                       in square brackets, e.g. public@[2001:760:4::1]:161
+
+     --use-16bit       Use 16bit SNMP request IDs to query all routers.
+
+     --snmp-options=:[<port>][:[<tmout>][:[<retr>][:[<backoff>][:<ver>]]]]
+
+                       Specify default SNMP options to be appended to all
+                       routers following.  Individual fields can be empty.
+                       Routers following might override some or all of the
+               options given to --snmp-options.
+
+     --dns-domain=domain
+               Specifies a domain to append to the name of all
+               routers following.
+
+     --nointerfaces    Don't do generate any configuration lines for interfaces,
+                       skip the step of gathering interface information and
+                       don't run any interface template code.
+
+     --interfaces      Generate configuration lines for interfaces (this is the
+                       default).  The main purpose of this option is to negate
+                       an --nointerfaces appearing earlier on the command line.
+
+     --help            brief help message
+     --man             full documentation
+     --version         print the version of cfgmaker
+
+     --output=file     output filename default is STDOUT
